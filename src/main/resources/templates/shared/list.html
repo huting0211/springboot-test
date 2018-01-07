@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="searchBox(searchBoxID, divs)" class="form-horizontal search-box form" th:id="${searchBoxID}" list-search="1">
+    <div class="form-body" th:insert="${divs}">
+
+    </div>
+</div>
+<div th:fragment="searchInput(width, spanTitle, inputID, inputType, inputName, inputOperator, inputValue)" th:class="${'col-md-' + width}">
+    <div class="form-group">
+        <div class="input-group">
+            <span class="input-group-addon" th:text="${spanTitle}"></span>
+            <input class="col-md-12 form-control" th:id="${inputID}" list-search-element="1"
+                   th:attr="list-search-prop=${inputName},list-search-oper=${inputOperator}" th:name="${inputName}" th:type="${inputType}" th:value="${inputValue}"/>
+        </div>
+    </div>
+</div>
+<div th:fragment="searchButton(width, tableVarName, text)" th:class="${'col-md-' + width}">
+    <a href="javascript:;" class="btn green" th:onclick="${tableVarName} + '.fnDraw()'" th:text="${text}"></a>
+</div>
+</html>

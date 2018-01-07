@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.system.web.dao.UserMapper">
+    <resultMap id="userResultMap" type="com.system.web.domain.User">
+        <id column="username" property="username" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="enabled" property="enabled" jdbcType="TINYINT"/>
+    </resultMap>
+    <resultMap type="Integer" id="count">
+        <result column="RecordCount" jdbcType="INTEGER" javaType="Integer" />
+    </resultMap>
+
+    <sql id="userColumnList">username, password, enabled</sql>
+
+    <sql id="dynamicQueryUserList">
+        SELECT <include refid="userColumnList"/> FROM users <include refid="dynamicQueryUserWhere"/> <include refid="dynamicQueryUserOrder"/>
+    </sql>
+
+    <sql id="dynamicQueryUserCount">
+        SELECT COUNT(1) AS RecordCount FROM users <include refid="dynamicQueryUserWhere"/>;
+    </sql>
+    <sql id="dynamicQueryUserWhere">
+        <where>
+            <foreach collection="filters" item="item">
+                <if test="item.value != null and item.value != ''">
+                    ${item.connector} ${item.property} ${item.operator.sqlOperator} #{item.value}
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="dynamicQueryUserOrder">
+        ORDER BY
+        <foreach collection="sorts" item="item" separator=",">
+            ${item.property} ${item.direction.shortName}
+        </foreach>
+    </sql>
+
+    <select id="getCountByCondition" resultMap="count"
+            parameterType="com.system.web.infrastructure.common.SearchModel">
+        <include refid="dynamicQueryUserCount"/>
+    </select>
+    
+    <select id="getPagedList" resultMap="userResultMap"
+            parameterType="com.system.web.infrastructure.common.PageSearchModel">
+        <include refid="dynamicQueryUserList"/>
+        limit #{startIndex}, #{pageSize}
+    </select>
+
+    <select id="getByUsername" resultMap="userResultMap" parameterType="String">
+        SELECT <include refid="userColumnList"/> FROM users WHERE username = #{username}
+    </select>
+
+    <insert id="addUser" parameterType="com.system.web.domain.User" >
+      INSERT INTO users(<include refid="userColumnList"/>) values(#{username}, #{password}, #{enabled})
+    </insert>
+
+    <update id="updateUser" parameterType="com.system.web.domain.User" >
+        UPDATE users SET password=#{password},enabled=#{enabled} where username=#{username}
+    </update>
+</mapper>

@@ -1,0 +1,80 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/shared/modalLayout">
+
+
+<div layout:fragment="modal-header">
+    <i class="fa fa-tv font-blue-sharp"></i>
+    <span class="caption-subject font-blue-sharp bold uppercase"
+          th:text="${model.formType.toString() == 'Add'} ? '新增用户' : '编辑用户'"></span>
+</div>
+
+<div layout:fragment="modal-body">
+    <form th:action="${model.formType.toString() == 'Add'} ? @{/user/add} : @{/user/edit}" th:object="${model.formModel}"
+          method="post" class="form-horizontal" id="form_user">
+        <div class="form-body">
+            <div class="form-group">
+                <label for="txtUsername" class="col-md-3 control-label">用户名</label>
+                <div class="col-md-6">
+                    <div class="input-icon right">
+                        <input type="text" name="username" id="txtUsername" th:field="*{username}"
+                               th:disabled="${model.formType.toString() == 'Edit'}" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="txtPassword" class="col-md-3 control-label">密码</label>
+                <div class="col-md-6">
+                    <div class="input-icon right">
+                        <input type="text" name="password" id="txtPassword" th:field="*{password}"
+                               class="form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="chkEnabled" class="col-md-3 control-label">启用</label>
+                <div class="col-md-6">
+                    <div class="input-icon right">
+                        <input type="checkbox" name="enabled" id="chkEnabled" th:field="*{enabled}"
+                               class="form-control"/>
+                    </div>
+                </div>
+            </div>
+            <div class="form-actions" style="text-align: right;">
+                <button id="btn_submitUser" type="submit" class="btn blue"><i class="icon-ok"></i>保存</button>
+                <button id="btn_cancelUser" type="button" class="btn" data-dismiss="modal">取消</button>
+            </div>
+        </div>
+    </form>
+    <script type="text/javascript">
+        /*<![CDATA[*/
+        $("#btn_submitUser").click(function () {
+            var form = $(this).parents("form");
+            var model = new Object();
+            model.username = $("#txtUsername").val();
+            model.password = $("#txtPassword").val();
+            model.enabled = $("#chkEnabled")[0].checked;
+            model._csrf = $("[name='_csrf']").val();
+            $.ajax({
+                url: form.attr("action"),
+                type: "post",
+                data: model,
+                success: function (data) {
+                    bootbox.alert(data.message, function(){
+                        tb_userOTable.fnDraw();
+                        $("#globalModal").modal("hide");
+                    });
+                },
+                error: function (data) {
+                    bootbox.alert(data.message);
+                }
+            });
+            return false;
+        });
+        /*]]>*/
+    </script>
+</div>
+
+<div layout:remove="modal-footer">
+</div>
+</html>

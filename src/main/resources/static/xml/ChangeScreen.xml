@@ -1,0 +1,5 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<!-- changeStatus  0 ：上墙状态 、1：切换到发红包状态-->
+<root>
+  <changeStatus>0</changeStatus>
+</root>

@@ -1,0 +1,65 @@
+
+spring:
+  thymeleaf:
+    prefix: classpath:/templates
+  mvc:
+    # 静态资源目录
+    static-path-pattern: /static/**
+
+  # 数据库配置
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/testdb?useUnicode=true&characterEncoding=utf-8
+    username: hhh
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  #指定bean所在包
+  type-aliases-package: com.system.web
+  #指定映射文件
+  mapperLocations: classpath:mapper/*.xml
+
+debug: false
+
+logger:
+  com.ibatis: DEBUG
+
+
+
+
+com-system-web:
+  menu:
+    menuItems:
+      -
+        title: "主页"
+        icon: "home"
+        url: "#"
+        children:
+          -
+            title: "子页"
+            icon: "home"
+            url: "/"
+          -
+            title: "子页2"
+            icon: "home"
+            url: "/2"
+      -
+        title: "用户管理"
+        icon: "user"
+        url: "/user"
+        activeMatches:
+          - "/user"
+          - "/user/detail"
+      -
+        title: "主页3"
+        icon: "list"
+        url: "/list"
+        children:
+          -
+            title: "子页4"
+            icon: "home"
+            url: "/list2"
+          -
+            title: "子页5"
+            icon: "home"
+            url: "/list3"

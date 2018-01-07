@@ -1,0 +1,10 @@
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout"
+      layout:decorator="/shared/layout">
+<head>
+
+</head>
+<div layout:fragment="body-content">
+    helloworld <span th:text="${user.username}"></span>
+</div>
+</html>

@@ -1,0 +1,24 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+<ul th:fragment="page-sidebar" class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+    <li th:each="menuItem : ${menu.menuItems}" th:class="'nav-item' +((${menuItem.active} == true) ? ' active open' : '')">
+        <a th:href="${menuItem.url}" class="nav-link nav-toggle">
+            <i th:class="'icon-' + ${menuItem.icon}"></i>
+            <span class="title" th:text="${menuItem.title}">Dashboard</span>
+            <span class="selected" th:if="${menuItem.active == true}"></span>
+            <span th:class="'arrow' +((${menuItem.active} == true) ? ' open' : '')"></span>
+        </a>
+        <ul th:if="${menuItem.children != null}" class="sub-menu">
+            <li th:each="childItem : ${menuItem.children}"
+                th:class="'nav-item' +((${childItem.active} == true) ? ' active open' : null)">
+                <a th:href="${childItem.url}" class="nav-link ">
+                    <i th:class="'icon-' + ${childItem.icon}"></i>
+                    <span class="title" th:text="${childItem.title}">Dashboard 1</span>
+                    <span class="selected"  th:if="${childItem.active == true}"></span>
+                </a>
+            </li>
+        </ul>
+    </li>
+</ul>
+</body>
+</html>

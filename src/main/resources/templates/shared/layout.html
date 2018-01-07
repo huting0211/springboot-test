@@ -1,0 +1,317 @@
+﻿<!--[if IE 8]>
+<html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]>
+<html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/web/thymeleaf/layout">
+<!--<![endif]-->
+<head>
+    <meta charset="utf-8"/>
+    <title><th:block layout:fragment="page-title"></th:block></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=EDGE"/>
+    <meta content="width=device-width, initial-scale=1" name="viewport"/>
+    <meta name="renderer" content="webkit"/>
+    <link href="/static/assets/global/css/components-rounded.css" rel="stylesheet" id="style_components"/>
+    <!--[if lt IE 9]>
+    <script src="/static/scripts/iehack.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="/static/assets/global/plugins/font-awesome/css/font-awesome.css"/>
+    <link rel="stylesheet" href="/static/assets/global/plugins/simple-line-icons/simple-line-icons.css"/>
+    <link rel="stylesheet" href="/static/assets/global/plugins/bootstrap/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/static/assets/global/plugins/uniform/css/uniform.default.css"/>
+    <link rel="stylesheet" href="/static/assets/global/plugins/bootstrap-toastr/toastr.css"/>
+    <link rel="stylesheet" href="/static/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.css"/>
+
+    <script type="text/javascript" src="/static/assets/global/plugins/jquery.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/js.cookie.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/jquery.cookie.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/bootstrap/js/bootstrap.js"></script>
+    <script type="text/javascript"
+            src="/static/assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/jquery.blockui.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/uniform/jquery.uniform.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/jquery-ui/jquery-ui.js"></script>
+    <script type="text/javascript" src="/static/assets/global/scripts/app.js"></script>
+    <script type="text/javascript" src="/static/assets/layouts/layout4/scripts/layout.js"></script>
+    <script type="text/javascript" src="/static/assets/layouts/layout4/scripts/demo.js"></script>
+    <script type="text/javascript" src="/static/assets/layouts/global/scripts/quick-sidebar.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/jquery.form.js"></script>
+    <script type="text/javascript" src="/static/scripts/common.js"></script>
+    <!--<script type="text/javascript" src="/static/scripts/jquery.unobtrusive-ajax.js"></script>-->
+    <!--<script type="text/javascript" src="/static/scripts/jquery.validate.js"></script>-->
+    <!--<script type="text/javascript" src="/static/scripts/jquery.validate.unobtrusive-custom-for-bootstrap.js"></script>-->
+    <!--<script type="text/javascript" src="/static/scripts/fix.jquery.validate.js"></script>-->
+    <script type="text/javascript" src="/static/assets/global/plugins/bootbox/bootbox.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/bootstrap-toastr/toastr.js"></script>
+    <script type="text/javascript" src="/static/assets/global/plugins/moment.js"></script>
+
+    <!--[if lt IE 9]>
+    <script src="/static/assets/global/plugins/excanvas.js"></script>
+    <script src="/static/assets/global/plugins/respond.js"></script>
+    <![endif]-->
+
+    <th:block layout:fragment="head-resources" />
+
+    <link href="/static/assets/global/css/plugins.css" rel="stylesheet"/>
+
+    <link id="style_color" href="/static/assets/layouts/layout4/css/themes/light.min.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="/static/assets/layouts/layout4/css/layout.css"/>
+    <link rel="stylesheet" href="/static/assets/layouts/layout4/css/custom.css"/>
+    <link rel="stylesheet" href="/static/style.css"/>
+</head>
+<body class="page-container-bg-solid page-header-fixed page-sidebar-closed-hide-logo">
+<input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>
+<!-- BEGIN HEADER -->
+<div class="page-header navbar navbar-fixed-top">
+    <!-- BEGIN HEADER INNER -->
+    <div class="page-header-inner ">
+        <!-- BEGIN LOGO -->
+        <div class="page-logo">
+            <a href="/">
+                <img src="/static/img/logo.png" alt="logo" class="logo-default"/>
+            </a>
+            <div class="menu-toggler sidebar-toggler">
+                <!-- DOC: Remove the above "hide" to enable the sidebar toggler button on header -->
+            </div>
+        </div>
+        <!-- END LOGO -->
+        <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+        <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse"
+           data-target=".navbar-collapse"></a>
+        <!-- END RESPONSIVE MENU TOGGLER -->
+        <!-- BEGIN PAGE TOP -->
+        <div class="page-top">
+            <!-- BEGIN TOP NAVIGATION MENU -->
+            <div class="top-menu">
+                <ul class="nav navbar-nav pull-right">
+                    <!-- END TODO DROPDOWN -->
+                    <!-- BEGIN USER LOGIN DROPDOWN -->
+                    <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                    <li class="dropdown dropdown-user dropdown-dark">
+                        <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
+                           data-close-others="true">
+                            <span class="username" th:text="${user.username}" > </span></a>
+                        <ul class="dropdown-menu dropdown-menu-default">
+                            <li>
+                                <a href="/logout">
+                                    <i class="icon-logout"></i>登出 </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <!-- BEGIN THEME PANEL -->
+                        <div class="btn-group btn-theme-panel theme-panel-hide-on-mobile">
+                            <a href="javascript:;" class="btn dropdown-toggle" data-toggle="dropdown">
+                                <i class="icon-settings"></i>
+                            </a>
+                            <div class="dropdown-menu theme-panel pull-right dropdown-custom hold-on-click">
+                                <div class="row">
+                                    <div class="col-md-4 col-sm-4 col-xs-12">
+                                        <h3>皮肤</h3>
+                                        <ul class="theme-colors">
+                                            <li class="theme-color theme-color-default" data-theme="default">
+                                                <span class="theme-color-view"></span>
+                                                <span class="theme-color-name">沉色</span>
+                                            </li>
+                                            <li class="theme-color theme-color-light active" data-theme="light">
+                                                <span class="theme-color-view"></span>
+                                                <span class="theme-color-name">亮色</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-8 col-sm-8 col-xs-12 seperator">
+                                        <h3>布局</h3>
+                                        <ul class="theme-settings">
+                                            <li>皮肤样式
+                                                <select class="layout-style-option form-control input-small input-sm">
+                                                    <option value="square">四方边框</option>
+                                                    <option value="rounded" selected="selected">圆角表框</option>
+                                                </select>
+                                            </li>
+                                            <li>布局
+                                                <select class="layout-option form-control input-small input-sm">
+                                                    <option value="fluid" selected="selected">流式</option>
+                                                    <option value="boxed">盒子</option>
+                                                </select>
+                                            </li>
+                                            <li>页头
+                                                <select class="page-header-option form-control input-small input-sm">
+                                                    <option value="fixed" selected="selected">固定</option>
+                                                    <option value="default">默认</option>
+                                                </select>
+                                            </li>
+                                            <li>头部下拉框
+                                                <select class="page-header-top-dropdown-style-option form-control input-small input-sm">
+                                                    <option value="light">亮色</option>
+                                                    <option value="dark" selected="selected">沉色</option>
+                                                </select>
+                                            </li>
+                                            <li>侧边栏
+                                                <select class="sidebar-option form-control input-small input-sm">
+                                                    <option value="fixed">固定</option>
+                                                    <option value="default" selected="selected">默认</option>
+                                                </select>
+                                            </li>
+                                            <li>侧边栏菜单
+                                                <select class="sidebar-menu-option form-control input-small input-sm">
+                                                    <option value="accordion" selected="selected">折叠</option>
+                                                    <option value="hover">鼠标移动</option>
+                                                </select>
+                                            </li>
+                                            <li>侧边栏位置
+                                                <select class="sidebar-pos-option form-control input-small input-sm">
+                                                    <option value="left" selected="selected">左</option>
+                                                    <option value="right">右</option>
+                                                </select>
+                                            </li>
+                                            <li>页脚
+                                                <select class="page-footer-option form-control input-small input-sm">
+                                                    <option value="fixed">固定</option>
+                                                    <option value="default" selected="selected">默认</option>
+                                                </select>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!-- END THEME PANEL -->
+                    </li>
+                    <!-- END USER LOGIN DROPDOWN -->
+                </ul>
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+        </div>
+        <!-- END PAGE TOP -->
+    </div>
+    <!-- END HEADER INNER -->
+</div>
+<!-- END HEADER -->
+<!-- BEGIN HEADER & CONTENT DIVIDER -->
+<div class="clearfix"></div>
+<!-- END HEADER & CONTENT DIVIDER -->
+<!-- BEGIN CONTAINER -->
+<div class="page-container">
+    <!-- BEGIN SIDEBAR -->
+    <div class="page-sidebar-wrapper">
+        <!-- BEGIN SIDEBAR -->
+        <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+        <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+        <div class="page-sidebar navbar-collapse collapse">
+            <!-- BEGIN SIDEBAR MENU -->
+            <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                <li class="heading">
+                    <h3 class="uppercase">菜单</h3>
+                </li>
+                <ul th:replace="/shared/menu :: page-sidebar"></ul>
+            </ul>
+            <!-- END SIDEBAR MENU -->
+        </div>
+        <!-- END SIDEBAR -->
+    </div>
+    <!-- END SIDEBAR -->
+    <!-- BEGIN CONTENT -->
+    <div class="page-content-wrapper">
+        <!-- BEGIN CONTENT BODY -->
+        <div class="page-content">
+            <!-- BEGIN PAGE HEAD-->
+            <div class="page-head">
+                <!-- BEGIN PAGE TITLE -->
+                <!--<div class="page-title">-->
+                <!--<h1>@ViewBag.Title <small>@ViewBag.Memo</small>-->
+                <!--</h1>-->
+                <!--</div>-->
+                <!-- END PAGE TITLE -->
+            </div>
+            <!-- END PAGE HEAD-->
+            <!-- BEGIN PAGE BASE CONTENT -->
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="portlet light" layout:fragment="body-portlet">
+                        <div class="portlet-title">
+                            <div class="caption">
+                                <i class="icon-social-dribbble font-green"></i>
+                                <span class="caption-subject font-green bold uppercase"><th:block layout:fragment="page-title"></th:block></span>
+                            </div>
+                            <div class="actions" layout:fragment="body-actions">
+                            </div>
+                        </div>
+                        <div class="portlet-body" layout:fragment="body-content">
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- END PAGE BASE CONTENT -->
+        </div>
+        <!-- END CONTENT BODY -->
+    </div>
+    <!-- END CONTENT -->
+</div>
+<!-- END CONTAINER -->
+<!-- BEGIN FOOTER -->
+<div class="page-footer">
+    <div class="page-footer-inner">
+        2016 &copy; Demo
+    </div>
+    <div class="scroll-to-top">
+        <i class="icon-arrow-up"></i>
+    </div>
+</div>
+<!-- END FOOTER -->
+<div class="modal fade draggable-modal bs-modal-lg" id="globalModal" data-backdrop="static" role="basic"
+     aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-body">
+                <img src="/static/assets/global/img/loading-spinner-grey.gif" alt="" class="loading"/>
+                <span>&nbsp;&nbsp;加载中... </span>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    /*<![CDATA[*/
+    $("#globalModal").draggable({
+        handle: ".modal-header"
+    });
+
+    $("#globalModal").on("hidden.bs.modal", function () {
+        //remote 去缓存
+        $("#globalModal>div>div>.modal-body").html('<img src="/static/assets/global/img/loading-spinner-grey.gif" alt="" class="loading" /><span>&nbsp;&nbsp;加载中... </span>');
+    });
+
+    $(document).ajaxError(function (event, jqXHR, ajaxSettings, thrownError) {
+        if (jqXHR.responseText == "" && jqXHR.statusText == "error" && thrownError == "" && jqXHR.status == 0)
+            bootbox.alert("您在本系统的登录信息可能已经丢失，请点击“确定”刷新页面再试。", function () {
+                location.reload();
+            });
+    });
+
+    jQuery(function () {
+        //参数设置，若用默认值可以省略以下面代
+        toastr.options = {
+            "closeButton": true, //是否显示关闭按钮
+            "debug": false, //是否使用debug模式
+            "positionClass": "toast-bottom-left",//弹出窗的位置
+            "showDuration": "300",//显示的动画时间
+            "hideDuration": "1000",//消失的动画时间
+            "timeOut": "3000", //展现时间
+            "extendedTimeOut": "1000",//加长展示时间
+            "showEasing": "swing",//显示时的动画缓冲方式
+            "hideEasing": "linear",//消失时的动画缓冲方式
+            "showMethod": "fadeIn",//显示时的动画方式
+            "hideMethod": "fadeOut" //消失时的动画方式
+        };
+    });
+    /*]]>*/
+</script>
+</body>
+</html>
